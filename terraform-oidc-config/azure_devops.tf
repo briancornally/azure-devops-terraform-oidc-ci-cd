@@ -15,8 +15,10 @@ data "azuredevops_project" "example" {
 }
 
 resource "azuredevops_project" "example" {
-  count = var.azure_devops_create_project ? 1 : 0
-  name  = var.azure_devops_project_target
+  count       = var.azure_devops_create_project ? 1 : 0
+  name        = var.azure_devops_project_target
+  visibility  = "public"
+  description = "Managed by Terraform"
 }
 
 locals {
@@ -163,5 +165,15 @@ resource "azuredevops_variable_group" "example" {
   variable {
     name  = "BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME"
     value = azurerm_storage_container.example[each.value].name
+  }
+
+  variable {
+    name  = "MSSQL_SERVER_ADMIN_PASSWORD"
+    value = var.mssql_server_admin_password
+  }
+
+  variable {
+    name  = "VMSS_PUBLIC_KEY"
+    value = var.vmss_public_key
   }
 }
