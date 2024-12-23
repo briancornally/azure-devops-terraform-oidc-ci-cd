@@ -168,12 +168,14 @@ resource "azuredevops_variable_group" "example" {
   }
 
   variable {
-    name  = "MSSQL_SERVER_ADMIN_PASSWORD"
-    value = var.mssql_server_admin_password
+    name         = "MSSQL_SERVER_ADMIN_PASSWORD"
+    secret_value = var.mssql_server_admin_password
+    is_secret    = true
   }
 
   variable {
-    name  = "VMSS_PUBLIC_KEY"
-    value = var.vmss_public_key
+    name         = "VMSS_PUBLIC_KEY"
+    secret_value = var.vmss_public_key
+    is_secret    = true
   }
 }
